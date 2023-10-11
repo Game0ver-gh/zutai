@@ -1,0 +1,78 @@
+/* style.css */
+
+body {
+    background: url('bg.png') center top no-repeat;
+    background-size: cover;
+    color: #333;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+	height: 100%;
+}
+
+header {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+nav li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #007acc;
+    font-weight: bold;
+}
+
+nav a[href="strona1.html"],
+nav a[href="strona2.html"],
+nav a[href="strona3.html"] {
+    color: #fff; 
+    font-size: 28px; 
+    padding: 5px; 
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+main {
+    margin: 20px;
+}
+
+article {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+p {
+    font-size: 16px;
+}
+
+footer {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 10px;
+}

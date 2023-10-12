@@ -76,3 +76,52 @@ footer {
     color: #fff;
     padding: 10px;
 }
+
+@media (max-width: 768px) {
+    body {
+        background: url('bg.png') center top no-repeat;
+        background-size: cover;
+        font-size: 16px; 
+    }
+
+    header {
+        font-size: 24px; 
+    }
+
+    main {
+        flex-direction: column; 
+    }
+
+    nav {
+        flex: 1;
+    }
+
+    .articles {
+        flex: 1;
+    }
+
+    nav ul {
+        text-align: center;
+    }
+
+    nav a {
+        display: block; 
+        padding: 10px;
+    }
+
+    article {
+        font-size: 18px; 
+    }
+
+    h3 {
+        font-size: 24px; 
+    }
+
+    p {
+        font-size: 20px; 
+    }
+
+    footer {
+        font-size: 18px; 
+    }
+}

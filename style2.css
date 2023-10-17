@@ -18,12 +18,28 @@ header {
     padding: 20px;
 }
 
+/* h1 {
+    font-size: 36px;
+} */
+
 h1 {
     font-size: 36px;
+    color: #00ff00; 
+    text-transform: uppercase; 
+    font-family: "Verdana", sans-serif; 
+    border-bottom: 2px solid #ff0000; 
 }
+
+/* h2 {
+    font-size: 24px;
+} */
 
 h2 {
     font-size: 24px;
+    color: #00ff00; 
+    text-transform: uppercase; 
+    font-family: "Verdana", sans-serif; 
+    border-bottom: 2px solid #ff0000; 
 }
 
 nav ul {
@@ -60,12 +76,31 @@ article {
     margin-bottom: 20px;
 }
 
+/* h3 {
+    font-size: 18px;
+} */
+
 h3 {
     font-size: 18px;
+    color: #ae00ff;
+    text-transform: uppercase; 
+    font-family: "Verdana", sans-serif;
+    border-bottom: 2px solid #ff0000; 
 }
+
+/* p {
+    font-size: 16px;
+} */
 
 p {
     font-size: 16px;
+    color: #0095ff; 
+    text-transform: uppercase; 
+    font-family: "Verdana", sans-serif; 
+    background-color: rgba(0, 0, 0, 0.1); 
+    padding: 15px; 
+    border: 2px dashed #000000; 
+    /* text-shadow: 2px 2px 4px #000; */
 }
 
 footer {

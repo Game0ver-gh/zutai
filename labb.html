@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista zadań</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 5px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .delete-button {
+            cursor: pointer;
+        }
+        .highlight {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Lista zadań</h1>
+        <input type="text" id="search" placeholder="Szukaj...">
+        <ul id="task-list"></ul>
+        <input type="text" id="task" placeholder="Dodaj nowe zadanie">
+        <input type="date" id="taskDate">
+        <button id="add-task">Dodaj</button>
+        <button id="delete-selected">Usuń zaznaczone</button>
+    </div>
+
+    <script>
+        class Todo {
+            constructor() {
+                this.tasks = [];
+                this.term = ''; 
+            }
+
+            addTask(taskText, taskDate) {
+                this.tasks.push({ text: taskText, date: taskDate, completed: false });
+            }
+
+            deleteTask(index) {
+                this.tasks.splice(index, 1);
+            }
+
+            toggleComplete(index) {
+                this.tasks[index].completed = !this.tasks[index].completed;
+            }
+
+            editDate(index, newDate) {
+                this.tasks[index].date = newDate;
+            }
+
+            draw() {
+                const taskList = document.getElementById("task-list");
+                taskList.innerHTML = '';
+
+                this.filteredTasks.forEach((task, index) => {
+                    const listItem = document.createElement("li");
+                    listItem.innerHTML = `
+                        <input type="checkbox" ${task.completed ? 'checked' : ''}>
+                        <span>${this.highlightText(task.text)}</span>
+                        <input type="date" value="${task.date}">
+                        <span class="delete-button" onclick="todo.deleteTask(${index})">X</span>
+                    `;
+                    listItem.querySelector("input[type='checkbox']").addEventListener("change", () => this.toggleComplete(index));
+                    listItem.querySelector("input[type='date']").addEventListener("change", (e) => this.editDate(index, e.target.value));
+                    listItem.addEventListener("click", () => listItem.classList.toggle("selected"));
+                    taskList.appendChild(listItem);
+                });
+            }
+
+            get filteredTasks() {
+                if (this.term.length < 3) {
+                    return this.tasks;
+                }
+                return this.tasks.filter(task => task.text.toLowerCase().includes(this.term.toLowerCase()));
+            }
+
+            highlightText(text) {
+                if (this.term.length < 3) {
+                    return text;
+                }
+                const regex = new RegExp(this.term, 'gi');
+                return text.replace(regex, match => `<span class="highlight">${match}</span>`);
+            }
+
+            saveToLocalStorage() {
+                localStorage.setItem("tasks", JSON.stringify(this.tasks));
+            }
+
+            loadFromLocalStorage() {
+                const storedTasks = localStorage.getItem("tasks");
+                if (storedTasks) {
+                    this.tasks = JSON.parse(storedTasks);
+                    this.draw();
+                }
+            }
+        }
+
+        const todo = new Todo();
+        todo.loadFromLocalStorage();
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.getElementById("search");
+            const addTaskInput = document.getElementById("task");
+            const addTaskDateInput = document.getElementById("taskDate");
+            const addTaskButton = document.getElementById("add-task");
+            const deleteSelectedButton = document.getElementById("delete-selected");
+
+            addTaskButton.addEventListener("click", function () {
+                const taskText = addTaskInput.value;
+                const taskDate = addTaskDateInput.value;
+                if (taskText.trim() !== "" && taskDate.trim() !== "") {
+                    todo.addTask(taskText, taskDate);
+                    addTaskInput.value = "";
+                    addTaskDateInput.value = "";
+                    todo.draw();
+                    todo.saveToLocalStorage();
+                }
+            });
+
+            deleteSelectedButton.addEventListener("click", function () {
+                const selectedItems = document.querySelectorAll("#task-list li.selected");
+                selectedItems.forEach(item => {
+                    const index = Array.from(item.parentElement.children).indexOf(item);
+                    todo.deleteTask(index);
+                });
+                todo.draw();
+                todo.saveToLocalStorage();
+            });
+
+            searchInput.addEventListener("input", function () {
+                todo.term = searchInput.value; 
+                todo.draw(); 
+            });
+
+            todo.draw();
+        });
+    </script>
+</body>
+</html>

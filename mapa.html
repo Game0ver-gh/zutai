@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Mapa</title>
+	<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+	<script src="leaflet-1.7.1/leaflet-src.js"></script>
+    <script src="leaflet-1.7.1/leaflet-providers.js"></script>
+    <script src="leaflet-1.7.1/leaflet-image.js"></script>
+    <style>
+        .main-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        #map-container, #puzzle-container {
+            margin: 10px;
+        }
+
+        #map { 
+            height: 600px; 
+			width: 600px;
+        }
+        #puzzle-container { 
+			margin: 10px;
+            border: 1px solid black; 
+            height: 600px; 
+			width: 600px;
+			flex-grow: 1;
+        }
+        #table { 
+            border: 1px solid black; 
+            margin-top: 20px; 
+            height: 400px; 
+			flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div id="map-container">
+            <div id="map"></div>
+        </div>
+        <div id="puzzle-container">
+            <!-- Tu będą wyświetlane puzzle -->
+        </div>
+		<canvas id="rasterMap"></canvas>
+    </div>
+    <div id="map-controls">
+        <button id="my-location">Moja lokalizacja</button>
+        <button id="download-map">Pobierz Mapę</button>
+    </div>
+    <div id="table">
+        <!-- Tu będą elementy do przeciągania -->
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
